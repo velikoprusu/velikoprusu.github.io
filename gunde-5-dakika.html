@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÜLKEM YANIMDA | Günde 5 Dakika Türkçe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF3E4;
+    --paper-line: rgba(31,45,61,0.10);
+    --ink:#1F2D3D;
+    --ink-soft:#5B6B7A;
+    --rust:#B8571F;
+    --card:#FFFDF7;
+    --radius:10px;
+
+    /* rhythm palette, shared with Türkçe Günlüğüm */
+    --tohum:#7C9A5C; --tohum-soft:#E7EEDD;
+    --filiz:#3D9285; --filiz-soft:#DDEEEA;
+    --fidan:#C98A2E; --fidan-soft:#F3E6CC;
+    --cinar:#33526E; --cinar-soft:#DCE5EC;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'Inter', sans-serif;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1100px; margin:0 auto; padding:0 24px;}
+
+  /* NAV */
+  header.site{
+    position:sticky; top:0; z-index:20;
+    background:rgba(250,243,228,0.92); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--paper-line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px; max-width:1100px; margin:0 auto;
+  }
+  .logo{ display:flex; align-items:center; text-decoration:none; }
+  .logo img{height:34px; display:block;}
+  nav.links{display:flex; gap:28px; font-size:0.92rem;}
+  nav.links a{ text-decoration:none; color:var(--ink-soft); padding-bottom:4px; border-bottom:2px solid transparent; }
+  nav.links a.active{color:var(--ink); border-color:var(--rust); font-weight:600;}
+  nav.links a:hover{color:var(--ink);}
+  @media (max-width:640px){ nav.links{gap:16px; font-size:0.82rem;} }
+
+  /* HERO BANNER */
+  .hero-banner{
+    margin:36px 0 28px; padding:44px 32px 40px; border-radius:22px;
+    position:relative; overflow:hidden; color:#fff;
+    background:linear-gradient(120deg, var(--fidan) 0%, var(--rust) 40%, var(--cinar) 100%);
+    box-shadow:0 14px 34px rgba(31,45,61,0.18);
+  }
+  .hero-banner::before, .hero-banner::after{
+    content:""; position:absolute; border-radius:50%;
+    background:rgba(255,255,255,0.14); pointer-events:none;
+  }
+  .hero-banner::before{width:240px; height:240px; top:-110px; right:-50px;}
+  .hero-banner::after{width:150px; height:150px; bottom:-80px; right:200px; background:rgba(255,255,255,0.10);}
+  .hero-banner > *{position:relative; z-index:1;}
+  .letter-deco{position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0;}
+  .letter-deco span{
+    position:absolute; font-family:'Fraunces', serif; font-weight:700;
+    color:rgba(255,255,255,0.16); line-height:1; user-select:none;
+  }
+  .letter-deco span:nth-child(1){font-size:170px; top:-46px; left:-14px; transform:rotate(-9deg);}
+  .letter-deco span:nth-child(2){font-size:120px; bottom:-38px; left:26%; transform:rotate(7deg);}
+  .letter-deco span:nth-child(3){font-size:150px; top:-20px; right:14%; transform:rotate(11deg);}
+  .letter-deco span:nth-child(4){font-size:100px; bottom:-24px; right:-10px; transform:rotate(-13deg);}
+  .kicker{
+    display:inline-block; color:#fff; font-weight:700; font-size:0.8rem;
+    letter-spacing:0.06em; text-transform:uppercase; margin-bottom:14px;
+    background:rgba(255,255,255,0.18); padding:6px 14px; border-radius:999px;
+  }
+  h1{
+    font-family:'Fraunces', serif; font-weight:600; color:#fff;
+    font-size:clamp(1.9rem, 3.6vw, 2.6rem); line-height:1.16; margin:0; max-width:20ch;
+    text-shadow:0 1px 12px rgba(0,0,0,0.12);
+  }
+  .lede{font-size:1.02rem; color:rgba(255,255,255,0.92); max-width:60ch; line-height:1.6; margin:14px 0 0;}
+
+  /* CARDS */
+  .cards{display:flex; flex-direction:column; gap:16px; margin:32px 0 40px;}
+
+  .card{
+    background:var(--card); border:1px solid var(--paper-line); border-radius:var(--radius);
+    display:flex; overflow:hidden; position:relative;
+    box-shadow:0 1px 2px rgba(31,45,61,0.04);
+    transition:box-shadow .2s, transform .2s;
+  }
+  .card:hover{box-shadow:0 10px 24px rgba(31,45,61,0.10); transform:translateY(-1px);}
+
+  .badge-col{
+    flex:0 0 150px; display:flex; flex-direction:column; justify-content:center;
+    align-items:flex-start; gap:4px; padding:18px 18px; color:#fff;
+    background-image:linear-gradient(160deg, rgba(255,255,255,0.16), transparent 60%);
+  }
+  .badge-col .day{font-family:'Fraunces', serif; font-weight:600; font-size:1.1rem;}
+  .badge-col .sub{font-size:0.8rem; opacity:0.88;}
+
+  .card.c0 .badge-col{background:var(--tohum);}
+  .card.c1 .badge-col{background:var(--filiz);}
+  .card.c2 .badge-col{background:var(--fidan);}
+  .card.c3 .badge-col{background:var(--cinar);}
+  .card.c4 .badge-col{background:#8A6D9E;}
+  .card.c5 .badge-col{background:#B8571F;}
+  .card.c6 .badge-col{background:#3B6FD1;}
+  .card.lesson .badge-col{background:var(--ink);}
+
+  .body-cols{
+    flex:1; display:grid; grid-template-columns:1.1fr 1.4fr 0.7fr;
+    gap:20px; padding:18px 22px; align-items:center;
+  }
+  .col .label{
+    font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em;
+    color:var(--ink-soft); margin:0 0 6px;
+  }
+  .col .text{font-size:0.92rem; line-height:1.45; margin:0;}
+  .word-chips{display:flex; flex-wrap:wrap; gap:6px;}
+  .word-chip{
+    font-size:0.78rem; padding:3px 10px; border-radius:999px; font-weight:600;
+  }
+  .card.c0 .word-chip{background:var(--tohum-soft); color:var(--tohum);}
+  .card.c1 .word-chip{background:var(--filiz-soft); color:var(--filiz);}
+  .card.c2 .word-chip{background:var(--fidan-soft); color:var(--fidan);}
+  .card.c3 .word-chip{background:var(--cinar-soft); color:var(--cinar);}
+  .card.c4 .word-chip{background:#EFE7F5; color:#8A6D9E;}
+  .card.c5 .word-chip{background:#F3E0D2; color:#B8571F;}
+  .card.c6 .word-chip{background:#DEE7FA; color:#3B6FD1;}
+
+  .skill-tag{
+    display:inline-flex; align-self:center; font-size:0.78rem; font-weight:700;
+    padding:6px 14px; border-radius:999px; background:var(--paper); color:var(--ink);
+    border:1px solid var(--paper-line);
+  }
+
+  .lesson-note{font-size:0.92rem; color:rgba(31,45,61,0.65); font-style:italic;}
+
+  @media (max-width:900px){
+    .card{flex-direction:column;}
+    .badge-col{flex-direction:row; align-items:baseline; gap:8px; flex:0 0 auto;}
+    .body-cols{grid-template-columns:1fr; gap:14px;}
+  }
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--paper-line); padding:36px 0; margin-top:20px;}
+  footer .wrap{display:flex; flex-direction:column; gap:6px;}
+  footer .brand{font-family:'Fraunces', serif; font-weight:600;}
+  footer .sub{font-size:0.85rem; color:var(--ink-soft);}
+  footer .copy{font-size:0.78rem; color:var(--ink-soft); margin-top:18px;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav">
+    <a class="logo" href="#">
+      <img src="icons/ulkem-yanimda-logo.png" alt="Ülkem Yanımda">
+    </a>
+    <nav class="links">
+      <a href="#" class="active">Günde 5 Dakika Türkçe</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero-banner">
+    <div class="letter-deco" aria-hidden="true">
+      <span>ö</span><span>ü</span><span>ş</span><span>ğ</span>
+    </div>
+    <div class="kicker">Küçük Anlar, Büyük Fark</div>
+    <h1>Türkçeyi Günlük Hayatın İçine Taşıyın</h1>
+    <p class="lede">
+      Sınıfımızda haftada bir gün, toplam 2 saat ders işliyoruz. Dilin kalıcı
+      olması içinse geri kalan altı günde günde sadece 5 dakika yeterli.
+      İşte bu haftanın küçük önerileri.
+    </p>
+  </section>
+
+  <div class="cards" id="cards"></div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">ÜLKEM YANIMDA</div>
+    <div class="sub">Yurt Dışı Türk Çocukları İçin Dijital Destek Platformu</div>
+    <div class="copy">© MEB YÜKSEKÖĞRETİM VE YURT DIŞI EĞİTİM GENEL MÜDÜRLÜĞÜ</div>
+  </div>
+</footer>
+
+<script>
+  // Ders gününü buradan değiştirebilirsiniz
+  const LESSON_DAY = "Cumartesi";
+
+  // Haftanın 7 günü için örnek içerik — ders günü hariç her gün küçük bir ev pratiği
+  const DAYS = [
+    { day:"Pazartesi", words:["anne","baba"], kazanim:"Anne ve babasını Türkçe adlandırır.", skill:"Konuşma" },
+    { day:"Salı", words:["kardeş","aile"], kazanim:"Aile kelimesini ve kardeş kavramını tanır.", skill:"Dinleme" },
+    { day:"Çarşamba", words:["seviyorum"], kazanim:"Sevgisini basit bir cümleyle ifade eder.", skill:"Konuşma" },
+    { day:"Perşembe", words:["ninni","şarkı"], kazanim:"Kısa bir Türkçe ninniyi tanır ve mırıldanır.", skill:"Dinleme" },
+    { day:"Cuma", words:["büyükanne","büyükbaba"], kazanim:"Geniş aile üyelerinin isimlerini öğrenir.", skill:"Kültür" },
+    { day:"Cumartesi", lesson:true },
+    { day:"Pazar", words:["bugün","yaptım"], kazanim:"Günlük bir olayı tek cümleyle anlatır.", skill:"Konuşma" }
+  ];
+
+  const cardsEl = document.getElementById('cards');
+
+  DAYS.forEach((d, i) => {
+    const card = document.createElement('div');
+    if(d.day === LESSON_DAY || d.lesson){
+      card.className = 'card lesson';
+      card.innerHTML = `
+        <div class="badge-col">
+          <span class="day">${d.day}</span>
+          <span class="sub">Ders Günü · 2 Saat</span>
+        </div>
+        <div class="body-cols" style="grid-template-columns:1fr;">
+          <p class="lesson-note">Bu hafta sınıfta buluşuyoruz — yeni kelimeler ve kalıplar burada öğreniliyor, geri kalan günlerde küçük pratiklerle pekiştiriyoruz.</p>
+        </div>
+      `;
+    } else {
+      const chips = d.words.map(w => `<span class="word-chip">${w}</span>`).join('');
+      card.className = `card c${i % 7}`;
+      card.innerHTML = `
+        <div class="badge-col">
+          <span class="day">${d.day}</span>
+          <span class="sub">5 Dakika</span>
+        </div>
+        <div class="body-cols">
+          <div class="col">
+            <p class="label">Hedef Kelimeler</p>
+            <div class="word-chips">${chips}</div>
+          </div>
+          <div class="col">
+            <p class="label">Kazanım</p>
+            <p class="text">${d.kazanim}</p>
+          </div>
+          <div class="col" style="text-align:center;">
+            <span class="skill-tag">${d.skill}</span>
+          </div>
+        </div>
+      `;
+    }
+    cardsEl.appendChild(card);
+  });
+</script>
+
+</body>
+</html>
